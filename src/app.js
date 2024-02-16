@@ -1,8 +1,11 @@
-import express  from "express";
-import morgan from 'morgan';
+import express from "express";
+import morgan from "morgan";
 import { connectBd } from "./db.js";
-connectBd()
+import authRoutes from "./routes/auth.routes.js"
+
+connectBd();
 
 const app = express();
-app.use(morgan("dev"))
-export default app
+app.use(morgan("dev"));
+app.use(authRoutes);
+export default app;

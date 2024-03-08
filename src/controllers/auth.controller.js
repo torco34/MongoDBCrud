@@ -54,10 +54,19 @@ export const login = async (req, res) => {
 };
 export const logout = (req, res) => {
   res.cookie("token", "", {
-    expires: new Date(0)
-  })
-  return res.sendStatus(200)
+    expires: new Date(0),
+  });
+  return res.sendStatus(200);
 };
-export const profile = (req, res) => {
-  res.send("profile")
-}
+export const profile = async (req, res) => {
+  const userFund = await User.findById(req.decoded.id);
+  if (!userFund) return res.status(400).json({ message: "user no func" });
+  return res.json({
+    id: userFund._id,
+    username: userFund.username,
+    email: userFund.email,
+    createdAt: userFund.createdAt,
+    updatedAt: userFund.updatedAt,
+  });
+  
+};

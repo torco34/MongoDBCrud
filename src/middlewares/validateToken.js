@@ -16,7 +16,7 @@ export const authQuired = (req, res, next) => {
     // El ID del usuario estará disponible en `decoded.id`
     console.log("ID del usuario:", decoded);
     req.decoded = decoded
-    //  console.log("ID del usuario:", decoded.id);
+     console.log("ID del usuario:", decoded.id);
 
     next();
   });

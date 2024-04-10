@@ -1,4 +1,3 @@
-
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 export const createdAccessToken = (payload) => {
@@ -7,8 +6,7 @@ export const createdAccessToken = (payload) => {
       payload,
       TOKEN_SECRET,
       {
-        expiresIn: "70d",
-        
+        expiresIn: "3d",
       },
       (err, token) => {
         if (err) reject(err);

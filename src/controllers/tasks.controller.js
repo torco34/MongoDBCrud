@@ -1,22 +1,10 @@
 import Task from "../models/task.model.js";
 
 export const getTasks = async (req, res) => {
-  try {
-    // Utiliza populate para cargar los documentos de usuario relacionados
-    const tasks = await Task.find({ user: req.decoded.id })
-
-    // Devuelve las tareas populadas con información de usuario
-    res.json(tasks);
-  } catch (error) {
-    // Manejo de errores
-    console.error(error);
-    res.status(500).json({ message: "Error al obtener las tareas" });
-  }
-
-  // const tasks = await Task.find({
-  //   user: req.decoded.id,
-  // }).populate(("user"))
-  // res.json(tasks);
+  const tasks = await Task.find({
+    user: req.decoded.id,
+  })
+  res.json(tasks);
 };
 
 export const createTasks = async (req, res) => {
@@ -40,7 +28,7 @@ export const getTask = async (req, res) => {
 export const deleteTasks = async (req, res) => {
   const task = await Task.findByIdAndDelete(req.params.id);
   if (!task) return res.status(404).json({ message: "task no found" });
-  res.json(task);
+  return res.sendStatus(204)
 };
 export const updateTasks = async (req, res) => {
   const task = await Task.findByIdAndUpdate(req.params.id, req.body, {

@@ -6,7 +6,7 @@ export const createdAccessToken = (payload) => {
       payload,
       TOKEN_SECRET,
       {
-        expiresIn: "3d",
+        expiresIn: "2d",
       },
       (err, token) => {
         if (err) reject(err);

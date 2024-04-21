@@ -14,7 +14,7 @@ export const registerSchemas = z.object({
       required_error: "email invalido ",
     }),
   password: z.string({
-    required_error: "username invalido ",
+    required_error: "password invalido lregiste ",
   }),
 });
 
@@ -28,6 +28,6 @@ export const loginSchemas = z.object({
     }),
 
   username: z.string({
-    required_error: "username invalido ",
+    required_error: "username invalido logi ",
   }),
 });

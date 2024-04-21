@@ -4,6 +4,8 @@ import { createdAccessToken } from "../libs/jwt.js";
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
   try {
+    const userFound = await User.findOne({ email });
+    if (userFound) return res.status(400).json(["Email ya  existe" ]);
     const passwordHash = await bcrypt.hash(password, 10);
     const newUSer = new User({
       username,
@@ -68,5 +70,4 @@ export const profile = async (req, res) => {
     createdAt: userFund.createdAt,
     updatedAt: userFund.updatedAt,
   });
-  
 };

@@ -1,5 +1,8 @@
 import { z } from "zod";
 export const registerSchemas = z.object({
+
+
+
   username: z.string({
     required_error: "username invalido ",
   }),
@@ -8,7 +11,7 @@ export const registerSchemas = z.object({
       required_error: "email invalido ",
     })
     .email({
-      required_error: "email invalido ",
+      required_error: "email is not invalido ",
     })
     .min(6, {
       required_error: "email invalido ",
@@ -19,15 +22,20 @@ export const registerSchemas = z.object({
 });
 
 export const loginSchemas = z.object({
+
+
   email: z
     .string({
-      required_error: "email invalido ",
+      required_error: "email is invalido ",
     })
     .email({
-      required_error: "email invalido ",
+      required_error: "email  invalido ",
     }),
 
-  username: z.string({
-    required_error: "username invalido logi ",
-  }),
+  password: z.string({
+    required_error: "password invalido  ",
+  })
+    .min(6, {
+      required_error: "minimo 6 caracteres ",
+    })
 });

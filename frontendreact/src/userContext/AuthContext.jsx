@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { loginRequest, registerRequest } from "../api/authe";
+import Cookies from "js-cookie";
+import { loginRequest, registerRequest, verityToken } from "../api/authe";
 
 export const AuthContext = createContext();
 
@@ -63,6 +64,32 @@ setError(errorMessages);
     }
 
   },[error]);
+
+
+  useEffect(() => {
+ async function checkLogin() {
+  
+    const cookies = Cookies.get()
+    console.log(cookies, "cookies")
+    console.log(verityToken, "cookies.token")
+ if(cookies.token){
+ try {
+   const res = await verityToken(cookies.token)
+   if(!res.data) setAuthentication(false)
+    // setAuthentication(true)
+  // Authenticated(true)
+ setUser(res.data)
+ } catch (error) {
+  setAuthentication(false)
+  authentication(null)
+  console.log(error, 'error')
+  setUser(null)
+ }
+  }
+
+}
+checkLogin()
+  },[]);
   return (
     <AuthContext.Provider
       value={{
